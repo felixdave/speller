@@ -1,12 +1,11 @@
 // Implements a dictionary's functionality
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
-#include <strings.h>
 #include <cs50.h>
 #include <ctype.h>
+#include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
+#include <strings.h>
 #include "dictionary.h"
 
 unsigned int countSize = 0;
@@ -16,8 +15,7 @@ typedef struct node
 {
     char word[LENGTH + 1];
     struct node *next;
-}
-node;
+} node;
 
 // Number of buckets in hash table
 const unsigned int N = 1;
@@ -39,7 +37,7 @@ bool check(const char *word)
         {
             return true;
         }
-    n = n->next;
+        n = n->next;
     }
     return false;
 }
@@ -63,7 +61,7 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
 
-    //Open dictionary file
+    // Open dictionary file
     FILE *readPtr = fopen(dictionary, "r");
 
     // Ensure pointer is not NULL
@@ -73,7 +71,7 @@ bool load(const char *dictionary)
     }
 
     // Define buffer
-    char thisWord[LENGTH + 1 ];
+    char thisWord[LENGTH + 1];
 
     // While reading, create node for each word, and count
     while (fscanf(readPtr, "%s", thisWord) != EOF)
@@ -86,12 +84,12 @@ bool load(const char *dictionary)
         }
 
         // Copy current word into node
-        strcpy(n -> word, thisWord);
+        strcpy(n->word, thisWord);
 
         // Get hash index save as int
         int hashIndex = hash(thisWord);
         // Assign pointer to hash index
-        n-> next = table[hashIndex];
+        n->next = table[hashIndex];
         // Head is asigned to new pointer
         table[hashIndex] = n;
         // Add another word to counter
